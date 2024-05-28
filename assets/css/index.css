@@ -22,7 +22,7 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 body {
-  background-color: var(--background-dark);
+  background: linear-gradient(to right, #1c1c1c, #242424, #1c1c1c);
   color: var(--app-light-gray);
   display: flex;
   justify-content: center;
