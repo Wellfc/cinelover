@@ -54,7 +54,7 @@ function showMoviesFound(movies) {
     listItems.forEach(item => {
         utils.listen('click', item, () => {
             movieQuery.value = item.textContent;
-            findMovies.click();
+            findMovies.focus();
             moviesAvailable.style.visibility = 'hidden';
         });
     });
@@ -85,10 +85,10 @@ function displayMovie(movie) {
 // Find movie
 utils.listen('click', findMovies, () => {
     const movie = movieList.find(movie => movie.title === movieQuery.value);
-    utils.print(movie);
+    // utils.print(movie);
     if (movie) {
         displayMovie(movie);
-        movieQuery.focus();
+        findMovies.focus();
     } else {
         moviesAvailable.innerHTML = `
         <ul class="movies-list">
