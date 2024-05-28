@@ -36,6 +36,8 @@ const movieList = movies.map(movie => {
 // Movies Titles
 const movieTitles = movieList.map(movie => movie.title);
 
+let currentDisplayedMovie = '';
+
 //Show list of movies found
 function showMoviesFound(movies) {
     const maxMoviesToShow = 5;
@@ -80,21 +82,27 @@ function displayMovie(movie) {
             </div>
         </div>
     `;
+    currentDisplayedMovie = movie.title;
 }
 
 // Find movie
 utils.listen('click', findMovies, () => {
-    const movie = movieList.find(movie => movie.title === movieQuery.value);
-    // utils.print(movie);
-    if (movie) {
-        displayMovie(movie);
-        findMovies.focus();
+    if (movieQuery.value !== currentDisplayedMovie) {
+        const movie = movieList.find(movie => movie.title === movieQuery.value);
+        // utils.print(movie);
+        if (movie) {
+            displayMovie(movie);
+            findMovies.focus();
+        } else {
+            moviesAvailable.innerHTML = `
+            <ul class="movies-list">
+                <li class="not-found">Movie not found</li>
+            </ul>
+        `;
+        }
     } else {
-        moviesAvailable.innerHTML = `
-        <ul class="movies-list">
-            <li class="not-found">Movie not found</li>
-        </ul>
-    `;
+        // utils.print('Movie already displayed');
+        movieQuery.focus();
     }
 });
 
